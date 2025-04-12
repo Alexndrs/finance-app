@@ -1,0 +1,19 @@
+{
+  "name": "finance-app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Suivi de finances perso + simulateur d’investissement",
+  "scripts": {
+    "dev": "echo 'Choisis un package à démarrer (core, desktop-app, web-backend)'"
+  },
+  "keywords": [],
+  "author": "Alexandre Dréan",
+  "license": "MIT",
+  "packageManager": "pnpm@10.8.0",
+  "devDependencies": {},
+  "workspaces": [
+    "core",
+    "desktop-app",
+    "web-backend"
+  ]
+}
