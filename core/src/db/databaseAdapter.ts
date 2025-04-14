@@ -9,6 +9,7 @@ export interface DatabaseAdapter {
     deleteUser(id: string): Promise<void>;
     updateUser(id: string, user: User): Promise<void>;
     getUserById(id: string): Promise<User | null>;
+    getUserByEmail(email: string): Promise<User | null>;
 
     getUserPreferences(userId: string): Promise<Preference | null>;
     updateUserPreferences(userId: string, preferences: Preference): Promise<void>;

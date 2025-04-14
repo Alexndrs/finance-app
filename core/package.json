@@ -8,16 +8,19 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/test.js",
-    "test": "tsc && node dist/tests/sqliteAdapter.test.js"
+    "test": "tsc && node dist/tests/sqliteAdapter.test.js && node dist/tests/auth.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.15.0",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/sqlite3": "^3.1.11",
     "typescript": "^5.8.3"
   }

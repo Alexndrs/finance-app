@@ -38,7 +38,7 @@ export class SQLiteAdapter implements DatabaseAdapter {
             CREATE TABLE IF NOT EXISTS ${this.usersTable} (
                 id TEXT PRIMARY KEY,
                 name TEXT,
-                email TEXT,
+                email TEXT UNIQUE,
                 password TEXT
             )`);
 
@@ -96,7 +96,11 @@ export class SQLiteAdapter implements DatabaseAdapter {
         return new Promise((resolve, reject) => {
             this.db.run(`INSERT INTO ${this.usersTable} (id, name, email, password) VALUES (?, ?, ?, ?)`, [user.id, user.name, user.email, user.password], (err) => {
                 if (err) {
-                    reject(err);
+                    if ((err as any).code === 'SQLITE_CONSTRAINT') {
+                        reject(new Error('Email already in use'));
+                    } else {
+                        reject(err);
+                    }
                 } else {
                     resolve();
                 }
@@ -138,6 +142,23 @@ export class SQLiteAdapter implements DatabaseAdapter {
             this.db.get(`
                 SELECT * FROM ${this.usersTable} WHERE id = ?`,
                 [id],
+                (err, row) => {
+                    if (err) {
+                        reject(err);
+                    } else if (row) {
+                        resolve(row as User);
+                    } else {
+                        resolve(null);
+                    }
+                })
+        })
+    }
+
+    async getUserByEmail(email: string): Promise<User | null> {
+        return new Promise((resolve, reject) => {
+            this.db.get(`
+                SELECT * FROM ${this.usersTable} WHERE email = ?`,
+                [email],
                 (err, row) => {
                     if (err) {
                         reject(err);

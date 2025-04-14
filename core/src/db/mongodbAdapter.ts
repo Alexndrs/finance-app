@@ -31,6 +31,10 @@ export class MongoDBAdapter implements DatabaseAdapter {
         throw new Error("Not implemented");
     }
 
+    async getUserByEmail(email: string): Promise<User | null> {
+        throw new Error("Not implemented");
+    }
+
 
     async getUserPreferences(userId: string): Promise<Preference | null> {
         throw new Error("Not implemented");
