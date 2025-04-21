@@ -7,9 +7,15 @@
     "strict": true,
     "outDir": "dist",
     "rootDir": "src", // utile si ton code est dans src/
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationMap": true
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }
